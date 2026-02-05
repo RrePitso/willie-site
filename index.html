@@ -11,13 +11,12 @@
         body { font-family: 'Outfit', sans-serif; }
         h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
         
-        /* The Willie Animation */
+        /* The Willie Animation Styles */
         .willie-container {
             position: relative;
             height: 500px;
             width: 100%;
             overflow: hidden;
-            transition: all 0.5s ease;
         }
         
         .willie-img {
@@ -31,20 +30,15 @@
             transition: opacity 0.3s ease-in-out;
         }
 
-        /* Default state: Pointing image hidden */
+        /* Default states */
+        .willie-smile { opacity: 1; }
         .willie-point { opacity: 0; }
         
-        /* Hover state on the container triggers the swap */
-        .interaction-zone:hover ~ .willie-container .willie-smile { opacity: 0; }
-        .interaction-zone:hover ~ .willie-container .willie-point { opacity: 1; }
-
-        /* Mobile touch support */
-        .interaction-zone:active ~ .willie-container .willie-smile { opacity: 0; }
-        .interaction-zone:active ~ .willie-container .willie-point { opacity: 1; }
+        /* Active states (triggered by Javascript) */
+        .willie-active .willie-smile { opacity: 0; }
+        .willie-active .willie-point { opacity: 1; }
 
         .blob-bg {
-            background-color: #f3f4f6;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             animation: blob 10s infinite alternate;
         }
         
@@ -93,9 +87,6 @@
                     <a href="#contact" class="bg-blue-600 text-white px-8 py-4 rounded-lg font-bold shadow-xl hover:bg-blue-700 transition text-center">
                         Book a Cup of Coffee
                     </a>
-                    <a href="#services" class="bg-white border border-slate-200 text-slate-700 px-8 py-4 rounded-lg font-bold hover:bg-slate-50 transition text-center">
-                        View Our Services
-                    </a>
                 </div>
             </div>
 
@@ -125,8 +116,8 @@
                     Financial planning can be confusing. I'm here to cut through the jargon and give you straight, honest advice—just like family would.
                 </p>
                 
-                <div class="interaction-zone inline-block">
-                    <a href="#contact" class="group bg-white text-blue-900 px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:bg-blue-50 transition flex items-center gap-3 cursor-pointer">
+                <div id="animation-trigger" class="inline-block cursor-pointer">
+                    <a href="#contact" class="group bg-white text-blue-900 px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:bg-blue-50 transition flex items-center gap-3">
                         Start Your Plan
                         <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition"></i>
                     </a>
@@ -139,7 +130,7 @@
             <div class="relative h-[400px] md:h-[500px] flex items-end justify-center">
                 <div class="absolute bottom-0 w-80 h-80 bg-blue-800 rounded-full blur-xl opacity-50"></div>
                 
-                <div class="willie-container">
+                <div id="willie-wrapper" class="willie-container">
                     <img src="img/willie-smile.jpg" alt="Willie Smiling" class="willie-img willie-smile">
                     <img src="img/willie-point.jpg" alt="Willie Pointing" class="willie-img willie-point">
                 </div>
@@ -157,33 +148,19 @@
 
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="group p-8 rounded-2xl bg-slate-50 hover:bg-white hover:shadow-xl transition border border-slate-100">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <i data-lucide="heart-pulse" class="w-6 h-6"></i>
-                    </div>
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition"><i data-lucide="heart-pulse" class="w-6 h-6"></i></div>
                     <h3 class="text-xl font-bold mb-3">Life & Medical</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">
-                        From Medical Aid to Severe Illness cover. We ensure you and your family are protected against life's curveballs.
-                    </p>
+                    <p class="text-slate-500 text-sm leading-relaxed">From Medical Aid to Severe Illness cover. We ensure you and your family are protected against life's curveballs.</p>
                 </div>
-
                 <div class="group p-8 rounded-2xl bg-slate-50 hover:bg-white hover:shadow-xl transition border border-slate-100">
-                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <i data-lucide="trending-up" class="w-6 h-6"></i>
-                    </div>
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition"><i data-lucide="trending-up" class="w-6 h-6"></i></div>
                     <h3 class="text-xl font-bold mb-3">Wealth & Investing</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">
-                        Retirement Annuities, Savings Plans, and Education policies. Let your money work as hard as you do.
-                    </p>
+                    <p class="text-slate-500 text-sm leading-relaxed">Retirement Annuities, Savings Plans, and Education policies. Let your money work as hard as you do.</p>
                 </div>
-
                 <div class="group p-8 rounded-2xl bg-slate-50 hover:bg-white hover:shadow-xl transition border border-slate-100">
-                    <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <i data-lucide="car" class="w-6 h-6"></i>
-                    </div>
+                    <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition"><i data-lucide="car" class="w-6 h-6"></i></div>
                     <h3 class="text-xl font-bold mb-3">Short Term Insurance</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">
-                        Covering your car, home, and business. Headed by our expert Yolande Impey.
-                    </p>
+                    <p class="text-slate-500 text-sm leading-relaxed">Covering your car, home, and business. Headed by our expert Yolande Impey.</p>
                 </div>
             </div>
         </div>
@@ -198,18 +175,8 @@
                         We aren't a faceless call center in Johannesburg. We are right here in Beacon Bay. When you call, you speak to Cindy, Nancy, or Marguerite—not a robot.
                     </p>
                     <ul class="space-y-4 mb-8">
-                        <li class="flex items-center gap-3">
-                            <i data-lucide="check-circle" class="text-green-500 w-5 h-5"></i>
-                            <span class="text-slate-700 font-medium">Claims paid within 24-48 hours</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i data-lucide="check-circle" class="text-green-500 w-5 h-5"></i>
-                            <span class="text-slate-700 font-medium">Personalized needs analysis</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i data-lucide="check-circle" class="text-green-500 w-5 h-5"></i>
-                            <span class="text-slate-700 font-medium">Family-run values</span>
-                        </li>
+                        <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-500 w-5 h-5"></i><span class="text-slate-700 font-medium">Claims paid within 24-48 hours</span></li>
+                        <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-500 w-5 h-5"></i><span class="text-slate-700 font-medium">Personalized needs analysis</span></li>
                     </ul>
                 </div>
                 
@@ -236,7 +203,7 @@
             <div class="grid md:grid-cols-4 gap-6">
                 <div class="text-center">
                     <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-blue-100 mb-4">
-                        <img src="img/willie-smile.jpg" class="w-full h-full object-cover transform scale-150 translate-y-2">
+                        <img src="img/willie.jpg" class="w-full h-full object-cover">
                     </div>
                     <h4 class="font-bold text-lg">Willie Du Plessis</h4>
                     <p class="text-blue-600 text-xs uppercase font-bold tracking-widest">CEO</p>
@@ -286,10 +253,6 @@
                         <i data-lucide="mail" class="text-blue-400"></i>
                         <a href="mailto:m@willieduplessis.co.za" class="hover:text-white transition">m@willieduplessis.co.za</a>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <i data-lucide="clock" class="text-blue-400"></i>
-                        <p>Mon-Thu: 8:30-4:00 | Fri: 8:30-1:30</p>
-                    </div>
                 </div>
             </div>
 
@@ -300,13 +263,6 @@
                         <input type="text" placeholder="Last Name" class="w-full bg-slate-900 border border-slate-700 rounded p-3 focus:border-blue-500 focus:outline-none transition">
                     </div>
                     <input type="email" placeholder="Email Address" class="w-full bg-slate-900 border border-slate-700 rounded p-3 focus:border-blue-500 focus:outline-none transition">
-                    <select class="w-full bg-slate-900 border border-slate-700 rounded p-3 text-slate-400 focus:border-blue-500 focus:outline-none transition">
-                        <option>What do you need help with?</option>
-                        <option>Life Insurance</option>
-                        <option>Car/Home Insurance</option>
-                        <option>Investments</option>
-                        <option>Medical Aid</option>
-                    </select>
                     <button class="w-full bg-blue-600 text-white font-bold py-4 rounded hover:bg-blue-500 transition">
                         Request a Call Back
                     </button>
@@ -319,7 +275,29 @@
     </footer>
 
     <script>
+        // Initialize Icons
         lucide.createIcons();
+
+        // Fix for the Willie Animation:
+        // We use JavaScript to add a class to the container when the trigger is hovered.
+        const trigger = document.getElementById('animation-trigger');
+        const wrapper = document.getElementById('willie-wrapper');
+
+        // Mouse Events for Desktop
+        trigger.addEventListener('mouseenter', () => {
+            wrapper.classList.add('willie-active');
+        });
+        trigger.addEventListener('mouseleave', () => {
+            wrapper.classList.remove('willie-active');
+        });
+
+        // Touch Events for Mobile
+        trigger.addEventListener('touchstart', () => {
+            wrapper.classList.add('willie-active');
+        });
+        trigger.addEventListener('touchend', () => {
+            wrapper.classList.remove('willie-active');
+        });
     </script>
 </body>
 </html>
